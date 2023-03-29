@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa Eletrônico</title>
+</head>
+<body>
+    <script>
+
+            var senha = 1530;
+            
+            var nome = prompt("Por favor digite seu nome:");
+            alert(`Olá ${nome}, é um prazer ter você aqui`) || "Desconhecido";
+        var saldo = 300.6;
+        function começo() {
+           
+            var escolha = parseFloat(prompt("Qual opção você quer conferir?: \n 1- Saldo \n 2- Depósito \n 3- Saque \n 4- Extrato \n 5-Transferência \n 6- Sair"));
+             switch (escolha){
+                case 1:
+                ver_saldo();
+                break;
+                case 2: 
+                fazer_deposito();
+                break;
+                case 3:
+                sacar();
+                break;
+                case 4:
+                mostrar_extrato();
+                break;
+                case 5:
+                fazer_transferência();
+                break;
+                case 6:
+                sair();
+                break;
+                default: //tipo else "se não"
+                erro();
+                break;
+             }
+            }
+             function ver_saldo(){
+                if (senha == prompt("Digite a senha")){
+                alert (`Seu saldo é: ${saldo}`);
+                começo();
+                } else{
+                   alert ("Senha Incorreta");
+                   ver_saldo();
+                }
+             }
+              function fazer_deposito(){
+                var depo = parseFloat(prompt("Qual o valor do depósito?"));
+                    if (isNaN(depo) || depo === '' || depo <= 0){
+                        alert("Por favor, digite um valor válido:");
+                        fazer_deposito();
+                    } else {
+                        saldo += depo;
+                        ver_saldo();
+                    }
+              } 
+              function sacar(){
+                 var saque = parseFloat(prompt("Qual o valor do saque?"));
+                 // Not a Number é quando o usuário não informa o número, e nesse caso vai dar erro.
+                    if(isNaN(saque) || saque === '' || saque >= saldo || saque <=0){
+                        alert (`Por favor, digite um valor válido:`);
+                        sacar();
+                    }else {
+                        saldo -= saque;
+                        ver_saldo();
+                    }
+              }
+              function mostrar_extrato(){
+                if(senha  == prompt("Digite a senha")){
+                    alert (" \n Depósito: R$500,00 \n Saque: R$ 30,00 \n Padaria do juca: 15,00");
+                    mostrar_extrato()
+                }else{
+                    alert ("Senha Incorreta");
+                    mostrar_extrato();
+                }
+            }          
+              function fazer_transferência(){
+                var conta = parseFloat(prompt(" Insira o número da conta:"));
+                if (isNaN (conta) || conta === ''|| conta < 0){
+                 alert (`Por favor, digite uma conta válida`);
+                 fazer_transferência();
+              }
+             
+             else {
+                let transfe =  parseFloat(prompt("Qual o valor da tranferência?"));
+                saldo += transfe;
+                alert (`Seu saldo é ${saldo}`);
+                começo(); 
+            }
+           }
+
+           function sair(){
+            var confirma = confirm("Você deseja sair?");
+                if (confirma){
+                    window.close(); //fechar janela
+                }else {
+                    inicio();
+                }
+           }
+
+              começo();
+    </script>    
+</body>
+</html>
